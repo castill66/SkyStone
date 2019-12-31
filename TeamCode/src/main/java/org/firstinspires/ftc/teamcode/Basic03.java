@@ -29,12 +29,10 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
 
 
 /**
@@ -50,14 +48,35 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Basic: Linear OpMode", group="Linear Opmode")
-@Disabled
-public class BasicOpMode_Linear extends LinearOpMode {
+@Autonomous(name="BasicDCMotor03", group="Basic testing")
+//@Disabled
+
+public class Basic03 extends LinearOpMode {
+
+    // Name of the Motors in the Robot Configuration
+    String NameLeftFront     = "LF";
+    //String NameLeftMiddle  = "LM";
+    String NameLeftRear      = "LR";
+    String NameRightFront    = "RF";
+    //String NameRightMiddle = "RM";
+    String NameRightRear     = "RR";
+
+    // Setup a variable for each drive wheel to save power level for telemetry
+    double leftPower  = 0.2;
+    double rightPower = 0.2;
+    double timer;
+    double t1 = 2.0;
+    double t2 = 2.0;
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor leftDrive = null;
-    private DcMotor rightDrive = null;
+    private DcMotor LeftFront = null;
+    //private DcMotor LeftMiddle = null;
+    private DcMotor LeftRear = null;
+    private DcMotor RightFront = null;
+    private DcMotor RightMiddle = null;
+    private DcMotor RightRear = null;
+
 
     @Override
     public void runOpMode() {
@@ -67,43 +86,78 @@ public class BasicOpMode_Linear extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
-        rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
+        LeftFront  = hardwareMap.get(DcMotor.class, NameLeftFront);
+        //LeftMiddle = hardwareMap.get(DcMotor.class, NameLeftMiddle);
+        LeftRear = hardwareMap.get(DcMotor.class, NameLeftRear);
+        RightFront = hardwareMap.get(DcMotor.class, NameRightFront);
+        //RightMiddle = hardwareMap.get(DcMotor.class, NameRightMiddle);
+        RightRear = hardwareMap.get(DcMotor.class, NameRightRear);
+
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
-        leftDrive.setDirection(DcMotor.Direction.FORWARD);
-        rightDrive.setDirection(DcMotor.Direction.REVERSE);
+        LeftFront.setDirection(DcMotor.Direction.REVERSE);
+        //LeftMiddle.setDirection(DcMotor.Direction.REVERSE);
+        LeftRear.setDirection(DcMotor.Direction.REVERSE);
 
+        RightFront.setDirection(DcMotor.Direction.FORWARD);
+        //RightMiddle.setDirection(DcMotor.Direction.FORWARD);
+        RightRear.setDirection(DcMotor.Direction.FORWARD);
+
+        //******************************************************************************************
         // Wait for the game to start (driver presses PLAY)
+        //******************************************************************************************
         waitForStart();
+
+        // Resetting the timer
         runtime.reset();
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
-            // Setup a variable for each drive wheel to save power level for telemetry
-            double leftPower;
-            double rightPower;
+            // Send Power to wheels
+            leftPower = 0.3;
+            rightPower = 0.3;
+            LeftFront.setPower(leftPower);
+            LeftRear.setPower(leftPower);
+            RightFront.setPower(rightPower);
+            RightRear.setPower(rightPower);
 
-            // Choose to drive using either Tank Mode, or POV Mode
-            // Comment out the method that's not used.  The default below is POV.
+            // Waiting for certain time
+            timer = runtime.time();
+            while(runtime.time() - timer <  2.0 && opModeIsActive());
 
-            // POV Mode uses left stick to go forward, and right stick to turn.
-            // - This uses basic math to combine motions and is easier to drive straight.
-            double drive = -gamepad1.left_stick_y;
-            double turn  =  gamepad1.right_stick_x;
-            leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
-            rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
+            // Send Power to wheels
+            leftPower = 0.3;
+            rightPower = -0.3;
+            LeftFront.setPower(leftPower);
+            LeftRear.setPower(leftPower);
+            RightFront.setPower(rightPower);
+            RightRear.setPower(rightPower);
 
-            // Tank Mode uses one stick to control each wheel.
-            // - This requires no math, but it is hard to drive forward slowly and keep straight.
-            // leftPower  = -gamepad1.left_stick_y ;
-            // rightPower = -gamepad1.right_stick_y ;
+            // Waiting for certain time
+            timer = runtime.time();
+            while(runtime.time() - timer <  2.0 && opModeIsActive());
 
-            // Send calculated power to wheels
-            leftDrive.setPower(leftPower);
-            rightDrive.setPower(rightPower);
+
+
+
+
+
+
+            // Send Power to wheels
+            leftPower = 0;
+            rightPower = 0;
+            LeftFront.setPower(leftPower);
+            LeftRear.setPower(leftPower);
+            RightFront.setPower(rightPower);
+            RightRear.setPower(rightPower);
+
+
+            // Waiting for more time than autonon
+            timer = runtime.time();
+            while(runtime.time() - timer <  200 && opModeIsActive());
+
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
