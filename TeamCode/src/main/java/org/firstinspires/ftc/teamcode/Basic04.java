@@ -48,10 +48,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="BasicDCMotor03", group="Basic testing")
+@Autonomous(name="BasicDCMotor04", group="Basic testing")
 //@Disabled
 
-public class Basic03 extends LinearOpMode {
+public class Basic04 extends LinearOpMode {
 
     // Name of the Motors in the Robot Configuration
     String NameLeftFront     = "LF";
@@ -114,18 +114,6 @@ public class Basic03 extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
-            // Send Power to wheels
-            leftPower = 0.3;
-            rightPower = 0.3;
-            LeftFront.setPower(leftPower);
-            LeftRear.setPower(leftPower);
-            RightFront.setPower(rightPower);
-            RightRear.setPower(rightPower);
-            // Waiting for certain time
-            timer = runtime.time();
-            while(runtime.time() - timer <  4.2 && opModeIsActive());
-
-
             //  first corner
             // Send Power to wheels
             leftPower = 0.3;
@@ -136,10 +124,10 @@ public class Basic03 extends LinearOpMode {
             RightRear.setPower(rightPower);
             // Waiting for certain time
             timer = runtime.time();
-            while(runtime.time() - timer <  1.0 && opModeIsActive());
+            while(runtime.time() - timer <  0.2 && opModeIsActive());
 
 
-            //secnd line
+            // first parallel
             leftPower = 0.3;
             rightPower = 0.3;
             LeftFront.setPower(leftPower);
@@ -148,9 +136,11 @@ public class Basic03 extends LinearOpMode {
             RightRear.setPower(rightPower);
             // Waiting for certain time
             timer = runtime.time();
-            while(runtime.time() - timer <  2.4 && opModeIsActive());
+            while(runtime.time() - timer <  4.8 && opModeIsActive());
 
-            //secnd corner
+
+            //  second corner
+            // Send Power to wheels
             leftPower = 0.3;
             rightPower = -0.3;
             LeftFront.setPower(leftPower);
@@ -159,7 +149,31 @@ public class Basic03 extends LinearOpMode {
             RightRear.setPower(rightPower);
             // Waiting for certain time
             timer = runtime.time();
-            while(runtime.time() - timer <  1.2 && opModeIsActive());
+            while(runtime.time() - timer <  1.9 && opModeIsActive());
+
+
+            //second parallel
+            leftPower = 0.3;
+            rightPower = 0.3;
+            LeftFront.setPower(leftPower);
+            LeftRear.setPower(leftPower);
+            RightFront.setPower(rightPower);
+            RightRear.setPower(rightPower);
+            // Waiting for certain time
+            timer = runtime.time();
+            while(runtime.time() - timer <  4.6 && opModeIsActive());
+
+
+            //third corner
+            leftPower = 0.3;
+            rightPower = -0.3;
+            LeftFront.setPower(leftPower);
+            LeftRear.setPower(leftPower);
+            RightFront.setPower(rightPower);
+            RightRear.setPower(rightPower);
+            // Waiting for certain time
+            timer = runtime.time();
+            while(runtime.time() - timer <  1.3 && opModeIsActive());
 
             //third line
             leftPower = 0.3;
@@ -170,8 +184,8 @@ public class Basic03 extends LinearOpMode {
             RightRear.setPower(rightPower);
             // Waiting for certain time
             timer = runtime.time();
-            while(runtime.time() - timer <  4.1 && opModeIsActive());
-
+            while(runtime.time() - timer <  2.5 && opModeIsActive());
+/*
             //third corner
             leftPower = 0.3;
             rightPower = -0.3;
@@ -193,7 +207,7 @@ public class Basic03 extends LinearOpMode {
             // Waiting for certain time
             timer = runtime.time();
             while(runtime.time() - timer <  2.4 && opModeIsActive());
-
+           */
 
             // STOPPING THE ROBOT
             // Send Power to wheels
