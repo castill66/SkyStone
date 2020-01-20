@@ -65,6 +65,7 @@ public class Basic01_with_Encoders extends LinearOpMode {
     double leftPower  = 0.2;
     double rightPower = 0.2;
     double TimeOut    = 10.0;
+    double distance   = 80.0;
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -127,13 +128,13 @@ public class Basic01_with_Encoders extends LinearOpMode {
         runtime.reset();
 
         // set left motor to run to 5000 encoder counts.
-        LeftFront.setTargetPosition((int) (COUNTS_PER_INCH*12.0));
+        LeftFront.setTargetPosition((int) (COUNTS_PER_INCH*distance));
         // set left motor to run to 5000 encoder counts.
-        LeftRear.setTargetPosition((int) (COUNTS_PER_INCH*12.0));
+        LeftRear.setTargetPosition((int) (COUNTS_PER_INCH*distance));
         // set left motor to run to 5000 encoder counts.
-        RightFront.setTargetPosition((int) (COUNTS_PER_INCH*12.0));
+        RightFront.setTargetPosition((int) (COUNTS_PER_INCH*distance));
         // set left motor to run to 5000 encoder counts.
-        RightRear.setTargetPosition((int) (COUNTS_PER_INCH*12.0));
+        RightRear.setTargetPosition((int) (COUNTS_PER_INCH*distance));
 
 
         // set left motor to run to target encoder position and stop with brakes on.
@@ -172,6 +173,11 @@ public class Basic01_with_Encoders extends LinearOpMode {
         RightFront.setPower(0.0);
         //RightMiddle.setPower(rightPower);
         RightRear.setPower(0.0);
+
+        runtime.reset();
+
+        while (opModeIsActive() && runtime.time() < TimeOut);
+
 /*            if(runtime.time() > TimeOut)
             {
                 leftPower = 0;
