@@ -102,12 +102,12 @@ public class TeleopPOV_Linear extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        LeftFront  = hardwareMap.get(DcMotor.class, NameLeftFront);
+        LeftFront  = hardwareMap.get(DcMotor.class, NameLeftFront);     // "LF"
         //LeftMiddle = hardwareMap.get(DcMotor.class, NameLeftMiddle);
-        LeftRear = hardwareMap.get(DcMotor.class, NameLeftRear);
-        RightFront = hardwareMap.get(DcMotor.class, NameRightFront);
+        LeftRear = hardwareMap.get(DcMotor.class, NameLeftRear);        // "LR"
+        RightFront = hardwareMap.get(DcMotor.class, NameRightFront);    // "RF"
         //RightMiddle = hardwareMap.get(DcMotor.class, NameRightMiddle);
-        RightRear = hardwareMap.get(DcMotor.class, NameRightRear);
+        RightRear = hardwareMap.get(DcMotor.class, NameRightRear);      // "RR"
 
 
         // Most robots need the motor on one side to be reversed to drive forward
@@ -130,8 +130,8 @@ public class TeleopPOV_Linear extends LinearOpMode {
             // Run wheels in POV mode (note: The joystick goes negative when pushed forwards, so negate it)
             // In this mode the Left stick moves the robot fwd and back, the Right stick turns left and right.
             // This way it's also easy to just drive straight, or just turn.
-            drive = -gamepad1.left_stick_y;
-            turn  =  gamepad1.right_stick_x;
+            drive = -gamepad1.right_stick_y*0.5;
+            turn  =  gamepad1.right_stick_x*0.5;
 
             // Combine drive and turn for blended motion.
             leftPower  = drive + turn;
