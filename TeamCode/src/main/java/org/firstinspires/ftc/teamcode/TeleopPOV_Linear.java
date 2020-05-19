@@ -33,6 +33,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -80,6 +81,7 @@ public class TeleopPOV_Linear extends LinearOpMode {
     private DcMotor RightFront = null;
     private DcMotor RightMiddle = null;
     private DcMotor RightRear = null;
+    private Servo   servo2    = null;
 
 
     @Override
